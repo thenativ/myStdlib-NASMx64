@@ -11,12 +11,6 @@ section .bss
 	%1 db %2, 0
 %endmacro
 
-%macro PRINT_STR 1
-	mov rdx, %1
-	mov rbx, 0
-	call _PRINTBUFFER
-%endmacro
-
 %macro STR_TOINT 3
 	mov rcx, %1
 	mov rdx, %2
@@ -72,5 +66,3 @@ __STR_TOINT_DONE:
 	mov [rcx], rax
 	ret
 
-__STR_REVERSE:
-	

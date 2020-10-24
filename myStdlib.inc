@@ -11,10 +11,26 @@ SYS_EXIT equ 60
 
 endl db 10, 0
 
+section .bss
+	BUFF _STDBUFF
+
 %macro exit 0
 	mov rax, SYS_EXIT
 	mov rdi, STDIN
 	syscall
+%endmacro
+
+%macro PRINT_STR 1
+	mov rdx, %1
+	mov rbx, 0
+	call _PRINTBUFFER
+%endmacro
+
+%macro PRINT_INT 2
+	mov rax, [%1]
+	mov rcx, _STDBUFF
+	mov rbx, %2
+	call _PRINTBUFFER
 %endmacro
 
 %macro GET_STR 1

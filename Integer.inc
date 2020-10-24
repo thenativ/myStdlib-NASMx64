@@ -10,13 +10,6 @@ SIZE_INT256 equ 256; 256-bit
 	%1 resb SIZE_INT256;
 %endmacro
 
-%macro PRINT_INT 1
-	mov rax, [%1]
-	mov rcx, INT_BUFFER
-	mov rbx, 10
-	call _PRINTBUFFER
-%endmacro
-
 %macro INT_TOSTR 3
 	mov rax, [%1]
 	mov rcx, %2
@@ -25,9 +18,7 @@ SIZE_INT256 equ 256; 256-bit
 %endmacro
 
 section .bss
-	INT256 INT_BUFFER
 	INTPTR INT_P
-
 
 section .text
 

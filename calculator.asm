@@ -18,7 +18,7 @@ _start:
 
 	STR_TOINT string, num, 10 
 	PRINT_STR num_equals
-	PRINT_INT num
+	PRINT_INT num, 10
 	PRINT_STR endl
 	PRINT_STR str_equals
 	PRINT_STR string
@@ -26,7 +26,7 @@ _start:
 
 	INT_TOSTR num, string, 10
 	PRINT_STR num_equals
-	PRINT_INT num
+	PRINT_INT num, 10
 	PRINT_STR endl
 	PRINT_STR str_equals
 	PRINT_STR string
