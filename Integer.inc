@@ -1,33 +1,44 @@
-INT32_SIZE equ 32; 32-byte
-INT64_SIZE equ 64; 64-byte
-INT256_SIZE equ 256; 256-bytes
+SIZE_INT32 equ 32; 32-bit
+SIZE_INT64 equ 64; 64-bit
+SIZE_INT256 equ 256; 256-bit
 
-section .bss
-	INT256 resb INT256_SIZE
-	INT_P resb 8
+%macro INTPTR 1
+	%1 resb 8
+%endmacro
+
+%macro INT256 1
+	%1 resb SIZE_INT256;
+%endmacro
 
 %macro PRINT_INT 1
-	mov rdx, %1
-	mov rcx, INT256
-	mov rbx, 1
+	mov rax, [%1]
+	mov rcx, INT_BUFFER
+	mov rbx, 10
 	call _PRINTBUFFER
 %endmacro
 
-%macro INT_TOSTR 1
+%macro INT_TOSTR 3
+	mov rax, [%1]
+	mov rcx, %2
+	mov rbx, %3
 	call __INT_TOSTRING
 %endmacro
+
+section .bss
+	INT256 INT_BUFFER
+	INTPTR INT_P
+
 
 section .text
 
 __INT_TOSTRING:
-
+	
 	mov [INT_P], rcx
 	push 0
 
 __INT_TOSTRING_ASCII:
-
+	
 	xor rdx, rdx
-	mov rbx, 10
 	div rbx
 	add rdx, 48
 	push rdx
@@ -48,3 +59,5 @@ __INT_TOSTRING_BYTES:
 	mov rsi, INT_P
 
 	ret
+
+

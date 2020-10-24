@@ -1,5 +1,11 @@
+BUFF_SIZE equ 256
+
 section .bss
 	STR_P resb 8
+
+%macro BUFF 1
+	%1 resb BUFF_SIZE;
+%endmacro
 
 %macro PRINT_STR 1
 	mov rdx, %1
@@ -7,8 +13,10 @@ section .bss
 	call _PRINTBUFFER
 %endmacro
 
-%macro STR_TOINT 1
+%macro STR_TOINT 3
 	mov rcx, %1
+	mov rdx, %2
+	mov rbx, %3
 	call __STR_TOINT
 %endmacro
 
@@ -35,11 +43,10 @@ __STR_SIZE_DONE:
 
 
 __STR_TOINT:	
-
-	mov [STR_P], rcx	
-	mov rbx, 10
-	xor rdx, rdx
+	
+	push rdx
 	xor rax, rax
+	xor rdx, rdx
 
 __STR_TOINT_ASCII:
 	
@@ -57,5 +64,6 @@ __STR_TOINT_ASCII:
 	jmp __STR_TOINT_ASCII
 
 __STR_TOINT_DONE:
-	mov [STR_P], rax
+	pop rcx
+	mov [rcx], rax
 	ret

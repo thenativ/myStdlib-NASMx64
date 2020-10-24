@@ -9,7 +9,6 @@ SYS_READ equ 0
 SYS_WRITE equ 1
 SYS_EXIT equ 60
 
-BUFF_SIZE equ 0xFF
 endl db 10, 0
 
 %macro exit 0
@@ -33,8 +32,8 @@ section .text
 _PRINTBUFFER:
 	cmp rbx, 0
 	je __PRINTBUFFER_STR
-	cmp rbx, 1
-	je __PRINTBUFFER_INT
+	cmp rbx, 64
+	jle __PRINTBUFFER_INT
 __PRINTBUFFER_INT:
 	call __INT_TOSTRING
 	jmp __PRINTBUFFER_SYSCALL
