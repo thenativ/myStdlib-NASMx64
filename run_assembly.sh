@@ -1,5 +1,5 @@
 if [ $# -lt 1 ]; then
-	echo "USAGE: make.sh <FILENAME WITHOUT EXTENSION>"
+	echo "USAGE: run_assembly.sh <FILENAME>"
 else
 	filename=$(echo $1 | cut -f 1 -d '.')
 	echo "Filename: $filename"
